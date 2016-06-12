@@ -41,9 +41,7 @@ if [ "$MoW" == "active" ]
      else
       echo Wechsele von Kanal $act_ch zu $clientonly_ch 
       echo  $NOW - MoW aktiv, wechsele Kanal $act_ch zu $clientonly_ch  >> /tmp/log/chchmesh
-echo debug 1
       uci set wireless.radio0.channel=$clientonly_ch
-echo debug 2
       uci commit wireless
       wifi
     fi
@@ -55,9 +53,7 @@ echo debug 2
      else
        echo Wechsle von Kanal $act_ch zu $mesh_ch
        echo  $NOW - MoW inaktiv, wechsele Kanal von $act_ch zu $mesh_ch >> /tmp/log/chchmesh
- echo debug 3
        uci set wireless.radio0.channel=$mesh_ch
-echo debug 4
        uci commit wireless
        wifi
      fi
