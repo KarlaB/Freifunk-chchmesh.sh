@@ -3,7 +3,7 @@
 #####################################################
 ## Automatische Kanalwahl abh. v. Mesh-Status auf WAN
 ## (nicht zusammen mit wificheck.sh betreiben)
-## V0.9 getestet auf 841 V9 mit FFFFM v1.10.2-test-78
+## V0.91 getestet auf 841V9 mit FFFFM v1.10.2-test-78
 #####################################################
 ## Info zum Cron-Job:
 ## Aufruf von:
@@ -29,7 +29,7 @@ NOW=$(date)
 act_ch=$(uci show wireless.radio0.channel | cut -d\' -f2)
 echo Aktueller Kanal: $act_ch
 mesh_ch="1"
-clientonly_ch="6"
+clientonly_ch="5"
 MoW=$(nodeinfo | grep br-wan: | cut -d\: -f2 | cut -c2-)
 
 if [ "$MoW" == "active" ]
@@ -41,6 +41,8 @@ if [ "$MoW" == "active" ]
      else
       echo Wechsele von Kanal $act_ch zu $clientonly_ch 
       echo  $NOW - MoW aktiv, wechsele Kanal $act_ch zu $clientonly_ch  >> /tmp/log/chchmesh
+        newlog=$(tail -n 6 /tmp/log/chchmesh)
+        echo $newlog > /tmp/log/chchmesh
       uci set wireless.radio0.channel=$clientonly_ch
       uci commit wireless
       wifi
@@ -53,9 +55,10 @@ if [ "$MoW" == "active" ]
      else
        echo Wechsle von Kanal $act_ch zu $mesh_ch
        echo  $NOW - MoW inaktiv, wechsele Kanal von $act_ch zu $mesh_ch >> /tmp/log/chchmesh
+        newlog=$(tail -n 6 /tmp/log/chchmesh)
+        echo $newlog > /tmp/log/chchmesh
        uci set wireless.radio0.channel=$mesh_ch
        uci commit wireless
        wifi
      fi
 fi
-
