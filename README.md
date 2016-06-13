@@ -2,6 +2,7 @@
 Automatische Kanalwahl abh. v. Mesh-Status auf WAN
 
 V0.9 getestet auf 841 V9 mit FFFFM v1.10.2-test-78, Kanalwechsel klappt
+
 V0.91 noch nicht erfolgreich getestet, Clientverbindung kommt auf neuem Kanal nicht zufriedenstellend zustande (IPV6 geht wohl, IPV4 scheinbar nich)
 
 (nicht zusammen mit wificheck.sh betreiben)
